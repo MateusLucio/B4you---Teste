@@ -1,0 +1,51 @@
+# version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: b4you-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: b4you_db
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: b4you-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: 123456
+      DB_NAME: b4you_db
+      DB_DIALECT: mysql
+      JWT_SECRET: segredo_supersecreto
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    # command: sh -c "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev"
+    # command: sh -c "npm install && npx sequelize db:migrate && npm run dev"
+    command: sh -c "npm run dev"
+
+# # frontend:
+# #   build: ./frontend
+# #   container_name: b4you-frontend
+# #   restart: always
+# #   ports:
+# #     - "5173:5173"
+# #   working_dir: /app
+# #   volumes:
+# #     - ./frontend:/app
+# #   command: sh -c "npm install && npm run dev"
+
+volumes:
+  mysql_data:
+    driver: local

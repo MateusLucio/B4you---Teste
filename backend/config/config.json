@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "senha123",
+    "password": "123456",
     "database": "b4you_db",
-    "host": "localhost",
+    "host": "mysql",
     "dialect": "mysql"
   },
   "test": {
