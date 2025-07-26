@@ -34,9 +34,9 @@ Criar um pequeno sistema de produtos (API + interface web) usando o stack básic
 
 Dê permissão de execução ao script de inicialização:
 
-'chmod +x start.sh'
+´chmod +x start.sh´
 
 Suba os containers com Docker Compose:
 
-'sudo docker-compose up --build'
+´sudo docker-compose up --build´
 
